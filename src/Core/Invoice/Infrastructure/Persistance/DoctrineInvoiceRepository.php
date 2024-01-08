@@ -14,20 +14,22 @@ class DoctrineInvoiceRepository implements InvoiceRepositoryInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly EventDispatcherInterface $eventDispatcher
     ) {}
-
-    public function getInvoicesWithGreaterAmountAndStatus(int $amount, InvoiceStatus $invoiceStatus): array
-    {
-        return $this->entityManager
-            ->createQueryBuilder()
-            ->select('i')
-            ->from(Invoice::class, 'i')
-            ->where('i.status = :invoice_status')
-            ->setParameter(':invoice_status', InvoiceStatus::NEW)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function save(Invoice $invoice): void
+	
+	public function getInvoicesWithGreaterAmountAndStatus(int $amount, InvoiceStatus $invoiceStatus): array
+	{
+		return $this->entityManager
+			->createQueryBuilder()
+			->select('i')
+			->from(Invoice::class, 'i')
+			->where('i.status = :invoice_status')
+			->andWhere('i.amount > :amount')
+			->setParameter(':invoice_status', $invoiceStatus)
+			->setParameter(':amount', $amount)
+			->getQuery()
+			->getResult();
+	}
+	
+	public function save(Invoice $invoice): void
     {
         $this->entityManager->persist($invoice);
 
