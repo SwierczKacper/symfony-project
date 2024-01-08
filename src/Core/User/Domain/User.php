@@ -42,7 +42,7 @@ class User
         return $this->email;
     }
 	
-	public function getActive(): bool
+	public function isActive(): bool
 	{
 		return $this->active;
 	}
