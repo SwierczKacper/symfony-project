@@ -36,6 +36,11 @@ class User
         $this->email = $email;
 		$this->active = false;
     }
+	
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
 
     public function getEmail(): string
     {

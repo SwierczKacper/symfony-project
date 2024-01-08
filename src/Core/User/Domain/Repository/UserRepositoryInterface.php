@@ -7,6 +7,8 @@ use App\Core\User\Domain\User;
 
 interface UserRepositoryInterface
 {
+	public function getByActiveStatus(bool $active);
+	
     /**
      * @throws UserNotFoundException
      */
