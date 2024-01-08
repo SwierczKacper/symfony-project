@@ -5,7 +5,7 @@ RUN a2enmod rewrite
 COPY . /var/www/html/
 
 # aktualizacja i instalacja bibliotek
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends \
         git \
         zlib1g-dev \
         libxml2-dev \
